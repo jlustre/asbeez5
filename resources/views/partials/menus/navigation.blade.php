@@ -9,15 +9,15 @@
                 <ul class="navbar-nav">
                     @include('partials.menus.home-menu')
 
-                    @include('partials.menus.shop-menu')
+                    {{-- @include('partials.menus.shop-menu') --}}
 
                     @include('partials.menus.product-menu')
 
                     @include('partials.menus.mega-menu')
 
-                    @include('partials.menus.blog-menu')
+                    {{-- @include('partials.menus.blog-menu') --}}
 
-                    @include('partials.menus.pages-menu')
+                    {{-- @include('partials.menus.pages-menu') --}}
 
                     @include('partials.menus.seller-menu')
                 </ul>

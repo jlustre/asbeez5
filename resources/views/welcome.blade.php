@@ -33,7 +33,7 @@
     <!-- Product Section End -->
 
     <!-- Blog Section Start -->
-    @include('partials.blog-section')
+    @include('about.blog-section')
     <!-- Blog Section End -->
 
     <!-- Footer Section Start -->

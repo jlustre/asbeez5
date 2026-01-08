@@ -4,14 +4,17 @@
             <div class="col-12">
                 <div class="slider-animate">
                     <div>
-                        <div class="home-contain rounded-0 p-0">
+                        <div class="home-contain rounded-0 p-0 min-h-[80vh] md:min-h-[90vh]">
                             <img src="{{ asset('assets/images/home-bg.jpg') }}"
                                 class="img-fluid bg-img blur-up lazyload bg-top" alt="">
                             <div class="home-detail p-center text-center home-overlay position-relative">
                                 <div>
-                                    <div class="content mt-4">
-                                        <h1>Modern Themes & Website Templates for any project</h1>
-                                        <h3>Discover thousands of digital products & downloads</h3>
+                                    <div class="content">
+                                        <h1 class="mt-4 md:mt-6 lg:mt-8">A Smarter Way to Shop And Get Rewarded</h1>
+                                        <h3>Earn Business Points From Every Purchase And Unlock Long-Term Rewards
+                                            Through Our AsBeez-Exclusive And Proprietary
+                                            Reward Structure
+                                        </h3>
                                         <div class="search-box input-group">
                                             <input type="search" class="form-control"
                                                 placeholder="I'm searching for...">

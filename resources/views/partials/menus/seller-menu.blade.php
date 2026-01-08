@@ -6,7 +6,7 @@
                 Seller</a>
         </li>
         <li>
-            <a class="dropdown-item" href="seller-dashboard.html">Seller
+            <a class="dropdown-item" href="{{ route('seller.dashboard') }}">Seller
                 Dashboard</a>
         </li>
         <li>

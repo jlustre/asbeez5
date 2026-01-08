@@ -25,3 +25,5 @@
 
 <!-- theme setting js -->
 <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
+
+@livewireScripts

@@ -11,7 +11,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Persist ?sp across the web session
+        $middleware->web(append: [\App\Http\Middleware\PersistSponsorReferral::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

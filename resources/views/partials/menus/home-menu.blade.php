@@ -5,12 +5,19 @@
         <li>
             <a class="dropdown-item" href="{{ route('home') }}">Home</a>
         </li>
+
         <li>
             <a class="dropdown-item" href="{{ route('about') }}">About Us</a>
         </li>
+
         <li>
-            <a class="dropdown-item" href="index.html">Kartshop</a>
+            <a class="dropdown-item" href="{{ route('faq') }}">FAQ</a>
         </li>
+
+        <li>
+            <a class="dropdown-item" href="{{ route('contact') }}">Contact Us</a>
+        </li>
+
         <li>
             <a class="dropdown-item" href="index-2.html">Sweetshop</a>
         </li>

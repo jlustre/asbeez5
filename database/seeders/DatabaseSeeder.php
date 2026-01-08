@@ -5,6 +5,11 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\CountrySeeder;
+use Database\Seeders\TimezoneSeeder;
+use Database\Seeders\ProfileSeeder;
+use Database\Seeders\VendorSeeder;
+use Database\Seeders\CommissionRateSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,13 +20,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => 'password',
-                'email_verified_at' => now(),
-            ]
-        );
+        // Seed countries and timezones first
+        $this->call([
+            CountrySeeder::class,
+            TimezoneSeeder::class,
+            UserRoleSeeder::class,
+            ProfileSeeder::class,
+            VendorSeeder::class,
+            CommissionRateSeeder::class,
+        ]);
     }
 }

@@ -53,13 +53,13 @@
                     <div class="footer-logo">
                         <div class="theme-logo">
                             <a href="index.html">
-                                <img src="{{ asset('assets/images/logo/1.png') }}" class="blur-up lazyload" alt="">
+                                <img src="{{ asset('assets/images/logo/4.png') }}" class="blur-up lazyload" alt="">
                             </a>
                         </div>
 
                         <div class="footer-logo-contain">
-                            <p>We are a friendly bar serving a variety of cocktails, wines and beers. Our bar is a
-                                perfect place for a couple.</p>
+                            <p>AsBeez turns everyday shopping into a rewards experience. When you buy products through
+                                our platform, your purchases earn Business Points.</p>
 
                             <ul class="address">
                                 <li>
@@ -118,13 +118,13 @@
                                 <a href="shop-left-sidebar.html" class="text-content">Shop</a>
                             </li>
                             <li>
-                                <a href="about-us.html" class="text-content">About Us</a>
+                                <a href="{{ route('about') }}" class="text-content">About Us</a>
                             </li>
                             <li>
                                 <a href="blog-list.html" class="text-content">Blog</a>
                             </li>
                             <li>
-                                <a href="contact-us.html" class="text-content">Contact Us</a>
+                                <a href="{{ route('contact') }}" class="text-content">Contact Us</a>
                             </li>
                         </ul>
                     </div>
@@ -153,7 +153,7 @@
                                 <a href="search.html" class="text-content">Search</a>
                             </li>
                             <li>
-                                <a href="faq.html" class="text-content">FAQ</a>
+                                <a href="{{ route('faq') }}" class="text-content">FAQ</a>
                             </li>
                         </ul>
                     </div>
