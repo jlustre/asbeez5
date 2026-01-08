@@ -1,5 +1,5 @@
 # AsBeez Loyalty Reward System (ALRS)
-*A loyalty engine that turns everyday purchases into long-term rewards—without subscriptions, recruiting, or exposing profit margins.*
+*A loyalty engine that turns everyday purchases into long-term rewards—without subscriptions, recruiting.*
 
 ## 1. Purpose and goals
 **ALRS** is designed to increase customer loyalty and repeat purchases across AsBeez businesses (e.g., Grocery, Bakery, Fastfood, Rice Retail, Farms) by awarding points that:
