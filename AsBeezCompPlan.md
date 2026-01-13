@@ -21,7 +21,7 @@ AsBeez operates as a marketplace facilitator and is not responsible for vendor p
 - **AsBeez Business Cell (ARC)** – A digital reward position earned by a Member upon accumulating qualifying ARCP, used solely for reward calculation and tracking.  
 - **Placement Structure** – A three-wide (3×∞), forced-fill placement structure used to determine ARC placement and reward eligibility.  
 - **Upline ARCs** – ARCs positioned above a newly created ARC in the placement structure, determined by direct parent relationships.  
-- **Qualified Level** – An upline level that exists and is eligible to receive Business Points at the time a new ARC is created.
+- **Qualified Level** – An upline level that exists and is eligible to receive Reward Points at the time a new ARC is created.
 
 ---
 

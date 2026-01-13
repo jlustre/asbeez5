@@ -11,7 +11,7 @@
                                 <div>
                                     <div class="content">
                                         <h1 class="mt-4 md:mt-6 lg:mt-8">A Smarter Way to Shop And Get Rewarded</h1>
-                                        <h3>Earn Business Points From Every Purchase And Unlock Long-Term Rewards
+                                        <h3>Earn Reward Points From Every Purchase And Unlock Long-Term Rewards
                                             Through Our AsBeez-Exclusive And Proprietary
                                             Reward Structure
                                         </h3>

@@ -59,7 +59,7 @@
 
                         <div class="footer-logo-contain">
                             <p>AsBeez turns everyday shopping into a rewards experience. When you buy products through
-                                our platform, your purchases earn Business Points.</p>
+                                our platform, your purchases earn Reward Points.</p>
 
                             <ul class="address">
                                 <li>

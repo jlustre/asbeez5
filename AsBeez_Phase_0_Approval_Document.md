@@ -124,8 +124,8 @@ The AsBeez Chart of Accounts is **approved as finalized** for implementation.
 
 ### 8.1 Terminology
 - **ALRS** – AsBeez Loyalty Reward System  
-- **QRC** – Qualifying Business Points  
-- **MBP** – Monetary Business Points  
+- **QRC** – Qualifying Reward Points  
+- **MBP** – Monetary Reward Points  
 - **ARC** – AsBeez Reward Cell  
 
 ### 8.2 QRC Rules

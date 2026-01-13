@@ -36,7 +36,7 @@ ARCs are placed into a structured network called the **ARC Grid** (a forced 3-wi
 
 > Important: Public-facing messaging should avoid “upline/downline” terms. Internally, “upline” is a technical term for the 12 eligible ARCs above a placement.
 
-### 2.4 QRP (Qualified Business Points)
+### 2.4 QRP (Qualified Reward Points)
 **QRP** is the customer’s *progress counter* used **only** to unlock new ARCs.
 
 **QRP characteristics:**
@@ -48,7 +48,7 @@ ARCs are placed into a structured network called the **ARC Grid** (a forced 3-wi
 
 > Think of QRP like “progress points” or “unlock points.”
 
-### 2.5 MRP (Monetary Business Points)
+### 2.5 MRP (Monetary Reward Points)
 **MRP** is the program’s *reward currency* used for **store-credit rewards** and **platform operations**.
 
 **MRP characteristics:**
