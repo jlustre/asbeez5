@@ -2,7 +2,7 @@
     <button class="btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4 d-lg-none">Show
         Menu</button>
     <div class="dashboard-right-sidebar">
-        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-content" id="pills-tARContent">
             <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel">
                 <div class="dashboard-home">
                     <div class="title">

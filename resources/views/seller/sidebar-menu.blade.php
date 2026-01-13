@@ -1,6 +1,6 @@
 <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-        <a href="#pills-tabContent" class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
+        <a href="#pills-tARContent" class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
             data-bs-target="#pills-dashboard" role="tab"><i data-feather="home"></i>
             Seller DashBoard</a>
     </li>

@@ -31,7 +31,7 @@ Phase 1 includes development of the following components:
 - Inventory ledger with stock movements
 - Accounting journal posting (double-entry)
 - Customer membership and QR scanning
-- QBP computation (internal margin-based)
+- QRC computation (internal margin-based)
 - ARC minting and forced 3-wide placement
 - MBP allocation and portal reserve logic
 - Store credit wallet and claim approval workflow

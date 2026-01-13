@@ -52,8 +52,8 @@ All unified by **one loyalty system** that increases customer lifetime value.
 
 ## Slide 5 – AsBeez Loyalty Reward System (ALRS)
 ### Loyalty Without Subscriptions or Recruiting
-- Customers earn **Qualified Points (QBP)** from purchases
-- Every 100 QBP unlocks a **Reward Cell (ARC)**
+- Customers earn **Qualified Points (QRC)** from purchases
+- Every 100 QRC unlocks a **Reward Cell (ARC)**
 - ARCs participate in community rewards
 - Rewards are **store credit only**
 - No sign-up fees, no subscriptions, no recruiting

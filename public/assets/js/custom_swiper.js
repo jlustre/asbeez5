@@ -3,7 +3,7 @@
 ==========================**/
 var swiper = new Swiper(".mySwiper", {
     effect: "cards",
-    grabCursor: true,
+    grARCursor: true,
     loop: true,
     centeredSlides: true,
     autoplay: {

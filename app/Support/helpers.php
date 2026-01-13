@@ -3,7 +3,7 @@
 if (! function_exists('base62_alphabet')) {
     function base62_alphabet(): string
     {
-        return '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        return '0123456789ARCDEFGHIJKLMNOPQRSTUVWXYZARCdefghijklmnopqrstuvwxyz';
     }
 }
 

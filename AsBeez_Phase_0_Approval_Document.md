@@ -95,7 +95,7 @@ POS access is device-bound.
 
 ### 6.2 Accounting Rules
 - Store credit is treated as a **liability**
-- QBP and MBP are **off-books** until converted
+- QRC and MBP are **off-books** until converted
 - Rewards expense is recognized only upon redemption
 - Franchise fees are amortized over the franchise term
 
@@ -124,24 +124,24 @@ The AsBeez Chart of Accounts is **approved as finalized** for implementation.
 
 ### 8.1 Terminology
 - **ALRS** – AsBeez Loyalty Reward System  
-- **QBP** – Qualifying Business Points  
+- **QRC** – Qualifying Business Points  
 - **MBP** – Monetary Business Points  
 - **ARC** – AsBeez Reward Cell  
 
-### 8.2 QBP Rules
+### 8.2 QRC Rules
 - Earned only from customer’s own purchases
 - Computed from internal margin snapshot
-- 10% of margin converted into QBP
-- Purchases using store credit earn **0 QBP**
+- 10% of margin converted into QRC
+- Purchases using store credit earn **0 QRC**
 
 ### 8.3 ARC Rules
-- 100 QBP = 1 ARC
-- ARC minted only from own QBP
+- 100 QRC = 1 ARC
+- ARC minted only from own QRC
 - Unlimited ARC ownership allowed
 - Forced 3-wide, infinite-depth placement
 
 ### 8.4 MBP Rules
-- 100 QBP generates 100 MBP budget
+- 100 QRC generates 100 MBP budget
 - 60 MBP allocated to up to 12 active uplines
 - Inactive uplines are skipped
 - Unused MBP flows to portal reserve
