@@ -31,6 +31,7 @@ class User extends Authenticatable
         'last_login_at',
         'last_login_ip',
         'hashed_id',
+        'permission_level',
     ];
 
     /**
@@ -60,6 +61,7 @@ class User extends Authenticatable
             'is_online' => 'boolean',
             'last_login_at' => 'datetime',
             'last_login_ip' => 'string',
+            'permission_level' => 'integer',
         ];
     }
     /**

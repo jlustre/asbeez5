@@ -28,6 +28,15 @@ Route::get('/contact', function () {
     return view('contact.contact');
 })->name('contact');
 
+// Point of Sale landing (guest accessible)
+Route::view('/pos', 'pos.index')->name('pos');
+// POS auth endpoints
+Route::post('/pos/login', [\App\Http\Controllers\POS\AuthController::class, 'login'])->name('pos.login');
+Route::get('/pos/logout', [\App\Http\Controllers\POS\AuthController::class, 'logout'])->name('pos.logout');
+// POS protected screens
+Route::view('/pos/home', 'pos.home')->middleware('pos.auth')->name('pos.home');
+Route::view('/pos/register', 'pos.register')->middleware('pos.auth')->name('pos.register');
+
 Route::view('dashboard', 'user.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -62,6 +71,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'can:adm
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     Route::resource('users', AdminUserController::class);
     Route::resource('vendors', AdminVendorController::class);
+    Route::resource('employees', \App\Http\Controllers\Admin\EmployeeController::class);
+    Route::resource('business-categories', \App\Http\Controllers\Admin\BusinessCategoryController::class);
+    Route::resource('branches', \App\Http\Controllers\Admin\BranchController::class);
+    Route::resource('branch-units', \App\Http\Controllers\Admin\BranchUnitController::class);
     // User addresses management
     Route::post('users/{user}/addresses', [AdminUserAddressController::class, 'store'])->name('users.addresses.store');
     Route::put('users/{user}/addresses/{address}', [AdminUserAddressController::class, 'update'])->name('users.addresses.update');

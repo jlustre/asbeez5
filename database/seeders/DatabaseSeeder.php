@@ -28,6 +28,9 @@ class DatabaseSeeder extends Seeder
             ProfileSeeder::class,
             VendorSeeder::class,
             CommissionRateSeeder::class,
+            CustomerSeeder::class,
+            EmployeeSeeder::class,
+            BranchSeeder::class,
         ]);
     }
 }

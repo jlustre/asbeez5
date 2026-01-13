@@ -1,0 +1,147 @@
+/* Consolidated POS styles */
+:root {
+  --brand-primary: #14161a;
+  --brand-accent: #DAA520; /* golden yellow */
+  --bg: #f7f7f8;
+  --panel: #2f3136;
+  --panel-2: #3a3d43;
+  --white: #fff;
+  --text: #222;
+  --muted: #6b7280;
+  --success: #1a9d5d;
+  --border: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: #111827;
+}
+
+/* Top bar + brand */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; }
+.brand svg { height: 26px; }
+.brand-title { font-weight: 800; letter-spacing: 0.5px; }
+.actions { display: inline-flex; gap: 10px; color: var(--muted); }
+.actions .icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  display: grid; place-items: center; background: #eef2f7; border: 1px solid var(--border);
+}
+.top-left { display: flex; align-items: center; gap: 10px; }
+.top-right { display: flex; align-items: center; gap: 12px; color: #B8860B; }
+.icon-btn {
+  width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  border: 1px solid var(--border); background: #f0f2f6; cursor: pointer; text-decoration: none; color: #111827;
+}
+
+/* POS entry page */
+.pos-shell { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
+.content { display: grid; place-items: center; padding: 32px 20px; background-image: radial-gradient(#e9eef5 1px, transparent 1px); background-size: 24px 24px; }
+.panel {
+  width: 340px; max-width: 92vw; background: var(--panel); color: var(--white);
+  border-radius: 16px; padding: 16px 16px 20px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.pin-boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+.pin { height: 40px; border-radius: 8px; background: var(--panel-2); display: grid; place-items: center; font-size: 20px; }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.btn { height: 52px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; font-size: 18px; display: grid; place-items: center; color: var(--panel); background: var(--white); }
+.btn:active { transform: translateY(1px); }
+.btn-danger { background: #FFF4D1; color: #7a5d0a; }
+.btn-enter { background: var(--brand-accent); color: var(--white); }
+.action-row { display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 16px; margin-top: 28px; }
+.action-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 14px 12px; text-align: center; cursor: pointer; box-shadow: 0 4px 0 #c4c7cc; }
+.action-card .title { font-weight: 800; margin-top: 8px; }
+.action-card:active { transform: translateY(1px); box-shadow: 0 3px 0 #c4c7cc; }
+
+/* POS home page */
+.menu { display: grid; grid-template-columns: repeat(4, minmax(220px, 1fr)); gap: 22px; padding: 32px; max-width: 1200px; margin: 0 auto; }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center; cursor: pointer; box-shadow: 0 6px 0 #c7cad0; }
+.card:hover { box-shadow: 0 8px 0 #c7cad0; }
+.card:active { transform: translateY(1px); box-shadow: 0 5px 0 #c7cad0; }
+.icon { font-size: 40px; line-height: 1; }
+.title { margin-top: 8px; font-weight: 800; letter-spacing: 0.2px; }
+
+/* POS register page */
+.shell { display: grid; grid-template-columns: 520px 220px 1fr; gap: 14px; padding: 12px; }
+.searchbar { display: flex; gap: 10px; }
+.input { flex: 1; height: 40px; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: var(--white); }
+.round-btn { width: 40px; height: 40px; border-radius: 12px; background: #f0f2f6; border: 1px solid var(--border); display: grid; place-items: center; cursor: pointer; }
+.table { margin-top: 10px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; height: 360px; display: flex; flex-direction: column; }
+.thead { background: #0f172a; color: #e5e7eb; display: grid; grid-template-columns: 1.1fr 1.4fr .7fr .8fr .9fr; padding: 8px 10px; font-size: 13px; font-weight: 700; }
+.tbody { flex: 1; background: var(--white); }
+.categories { display: flex; flex-direction: column; gap: 10px; }
+.cat { background: #374151; color: #fff; border-radius: 10px; padding: 12px; font-weight: 700; cursor: pointer; }
+.cat.active { background: var(--brand-accent); }
+.items-grid { background: #eef2f7; border: 1px solid var(--border); border-radius: 10px; padding: 12px; display: grid; grid-template-columns: repeat(3, 160px); grid-auto-rows: 84px; gap: 14px; justify-content: start; }
+.item { background: #fff; border: 1px solid var(--border); border-radius: 12px; display: grid; place-items: center; font-weight: 700; color: #111827; cursor: pointer; }
+
+.btn-primary {
+  background: var(--brand-accent);
+  color: var(--white);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn {
+  background: var(--brand-accent);
+  color: var(--white);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: medium;
+}
+
+/* Footer */
+.footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 20px; background: var(--brand-primary); color: #e5e7eb; font-size: 14px; }
+.footer .kv { display: inline-flex; gap: 6px; align-items: baseline; }
+.footer .label { color: #9ea3aa; }
+.footer-inner { display: grid; grid-template-columns: 220px 1fr 640px; gap: 12px; padding: 10px 12px; align-items: center; }
+.totals { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.tot-card { background: #111827; border-radius: 10px; padding: 10px; }
+.tot-title { color: #9ea3aa; font-size: 12px; }
+.tot-value { font-size: 16px; font-weight: 800; }
+.register-total { background: var(--brand-accent); color: #fff; border-radius: 10px; padding: 5px  10px 8px 10px; text-align: center; font-weight: 600; }
+.tender { display: flex; gap: 10px; justify-content: flex-end; }
+.btn.alt { background: #111827; border: 1px solid var(--border); color: #fff; }
+
+/* Modals + badge */
+.pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8e1; border: 1px solid var(--brand-accent); color: #111827; padding: 4px 8px; border-radius: 20px; font-size: 12px; }
+.pill .x { cursor: pointer; margin-left: 6px; color: #B8860B; font-weight: 800; }
+.modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 90; }
+.modal { display: none; position: fixed; inset: 0; align-items: center; justify-content: center; z-index: 100; }
+.modal-card { width: 760px; max-width: calc(100% - 40px); background: #fff; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 25px 45px rgba(0,0,0,0.25); overflow: hidden; }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #0f172a; color: #fff; }
+.modal-body { padding: 14px; background: #fff; }
+.close-x { cursor: pointer; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.list { display: flex; flex-direction: column; gap: 8px; }
+.list-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #f9fafb; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+
+/* Responsive tweaks */
+@media (max-width: 980px) { .action-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1200px) {
+  .shell { grid-template-columns: 1fr; }
+  .items-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; }
+  .tender { justify-content: flex-start; }
+}
+@media (max-width:1100px) { .menu { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width:800px) { .menu { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:520px) { .menu { grid-template-columns: 1fr; padding: 16px; } }

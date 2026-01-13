@@ -123,4 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'pos_version' => env('POS_VERSION', '1.0.0'),
+    'pos_register_number' => env('POS_REGISTER_NUM', '1'),
+    'pos_branch_code' => env('POS_BRANCH_CODE', 'GR-001'),
+    'pos_branch_name' => env('POS_BRANCH_NAME', 'Main Branch'),
+
 ];

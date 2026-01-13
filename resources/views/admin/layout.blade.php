@@ -103,6 +103,15 @@
                     class="{{ request()->routeIs('admin.vendors.*') ? 'active' : '' }}">Vendors</a>
                 <a href="{{ route('admin.users.index') }}"
                     class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Users</a>
+                <a href="{{ route('admin.employees.index') }}"
+                    class="{{ request()->routeIs('admin.employees.*') ? 'active' : '' }}">Employees</a>
+                <a href="{{ route('admin.business-categories.index') }}"
+                    class="{{ request()->routeIs('admin.business-categories.*') ? 'active' : '' }}">Business
+                    Categories</a>
+                <a href="{{ route('admin.branches.index') }}"
+                    class="{{ request()->routeIs('admin.branches.*') ? 'active' : '' }}">Branches</a>
+                <a href="{{ route('admin.branch-units.index') }}"
+                    class="{{ request()->routeIs('admin.branch-units.*') ? 'active' : '' }}">Branch Units</a>
                 <a href="#">Orders</a>
                 <a href="#">Reports</a>
                 <a href="#">Settings</a>
