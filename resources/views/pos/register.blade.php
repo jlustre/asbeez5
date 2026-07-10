@@ -47,8 +47,12 @@
 
 <!-- Right quick items -->
 <div class="items-grid" id="items-grid">
-    <div class="item" data-sku="LIMES" data-price="1.50">LIMES</div>
-    <div class="item" data-sku="ICEBAG5" data-price="3.00">ICE BAG\n5lbs</div>
+    <div class="item" data-sku="LIMES" data-price="1.50" data-tax-bp="1200" data-route="COUNTER">LIMES</div>
+    <div class="item" data-sku="ICEBAG5" data-price="3.00" data-tax-bp="1200" data-route="COUNTER">ICE BAG\n5lbs</div>
+</div>
+<div style="margin-top:16px;">
+    <button class="btn" id="quickDemoSale">Quick Demo Sale (Order+Pay)</button>
+    <small style="margin-left:8px;color:#6b7280;">Creates an order via API then captures cash payment.</small>
 </div>
 @endsection
 
@@ -136,9 +140,10 @@
         <button class="btn" data-amt="20">$ 20</button>
         <button class="btn" data-amt="50">$ 50</button>
         <button class="btn" data-amt="100">$ 100</button>
-        <button class="btn">EXACT AMT</button>
+        <button class="btn" id="btnExactAmt">EXACT AMT</button>
         <button class="btn alt">CARD</button>
     </div>
+    <div id="paymentStatus" style="margin-top:10px; color:#111827;"></div>
 </div>
 @endsection
 
@@ -150,10 +155,12 @@
     const cashSubtotalEl = document.getElementById('cashSubtotal');
     const cardSubtotalEl = document.getElementById('cardSubtotal');
     const itemCountEl = document.getElementById('itemCountBadge');
-    let items = []; // {sku,name,qty,reg,card}
+    const paymentStatusEl = document.getElementById('paymentStatus');
+    let posCtx = { branch_id: 1, branch_unit_id: 1, register_id: 1, employee_id: 1 };
+    let items = []; // {sku,name,qty,reg,card,tax_bp,route}
 
     function fmt(n){ return '$' + (Number(n).toFixed(2)); }
-    function renderCart(){
+        function renderCart(){
       cartBody.innerHTML = '';
       items.forEach(row => {
         const line = document.createElement('div');
@@ -165,10 +172,13 @@
         line.innerHTML = `<div>${row.sku}</div><div>${row.name}</div><div>${row.qty}</div><div>${fmt(row.reg)}</div><div>${fmt(sub)}</div>`;
         cartBody.appendChild(line);
       });
-            const total = items.reduce((t, r) => t + (r.reg * r.qty), 0);
+                        const subtotal = items.reduce((t, r) => t + (r.reg * r.qty), 0);
+                        const tax = items.reduce((t, r) => t + ((r.reg * r.qty) * (Number(r.tax_bp||0)/10000)), 0);
+                        const total = subtotal + tax;
             const count = items.reduce((t, r) => t + r.qty, 0);
-      grandTotalEl.textContent = fmt(total);
-    cashSubtotalEl.textContent = fmt(total);
+            grandTotalEl.textContent = fmt(total);
+        cashSubtotalEl.textContent = fmt(subtotal);
+        const taxEl = document.getElementById('cashTax'); if(taxEl){ taxEl.textContent = fmt(tax); }
     if(cardSubtotalEl){ cardSubtotalEl.textContent = fmt(total); }
             if(itemCountEl){ itemCountEl.textContent = count; }
     }
@@ -178,15 +188,85 @@
       const sku = btn.getAttribute('data-sku');
       const name = btn.textContent.replace(/\n/g,' ');
       const price = parseFloat(btn.getAttribute('data-price')) || 0;
-      const existing = items.find(i => i.sku === sku);
+            const tax_bp = parseInt(btn.getAttribute('data-tax-bp')||'0', 10);
+            const route = btn.getAttribute('data-route') || 'COUNTER';
+            const existing = items.find(i => i.sku === sku && i.tax_bp === tax_bp && i.route === route);
       if(existing){ existing.qty += 1; }
-      else{ items.push({ sku, name, qty:1, reg: price, card: price }); }
+            else{ items.push({ sku, name, qty:1, reg: price, card: price, tax_bp, route }); }
       renderCart();
     });
 
+        function toCents(n){ return Math.round(Number(n) * 100); }
+        function currentTotal(){ return items.reduce((t,r)=> t + (Number(r.reg)*Number(r.qty)), 0); }
+        function buildOrderFromCart(){
+            return {
+                client_request_id: 'pos-' + Date.now(),
+                context: posCtx,
+                order: {
+                    type: 'takeaway',
+                    items: items.map(i => ({
+                        sku: i.sku,
+                        name: i.name,
+                        qty: i.qty,
+                        unit_price_cents: toCents(i.reg),
+                        tax_rate_bp: i.tax_bp || 0,
+                        route_station: i.route || 'COUNTER'
+                    }))
+                }
+            };
+        }
+        async function createOrderFromCart(){
+            if(items.length === 0){ throw new Error('Cart is empty'); }
+            const payload = buildOrderFromCart();
+            const res = await fetch('/api/v1/orders', {
+                method: 'POST', headers: { 'Content-Type':'application/json', 'Idempotency-Key': idemKey() }, body: JSON.stringify(payload)
+            });
+            if(!res.ok){ const t = await res.text(); throw new Error('Order failed: ' + res.status + ' ' + t); }
+            const json = await res.json();
+            return json.public_id;
+        }
+        async function payOrder(publicId, amountCents){
+            const res = await fetch(`/api/v1/orders/${publicId}/payments`, {
+                method: 'POST', headers: { 'Content-Type':'application/json', 'Idempotency-Key': idemKey() }, body: JSON.stringify({ method:'cash', amount_cents: amountCents })
+            });
+            if(!res.ok){ const t = await res.text(); throw new Error('Payment failed: ' + res.status + ' ' + t); }
+            return await res.json();
+        }
+        function setStatus(msg, ok=true){
+            if(!paymentStatusEl) return;
+            paymentStatusEl.textContent = msg;
+            paymentStatusEl.style.color = ok ? '#065f46' : '#b91c1c';
+        }
+        async function tenderWithAmount(dollars){
+            try{
+                setStatus('Processing payment…');
+                const oid = await createOrderFromCart();
+                const pay = await payOrder(oid, toCents(dollars));
+                const rn = pay && pay.receipt_number ? ` Receipt #${pay.receipt_number}.` : '';
+                setStatus(`Paid. Change due: $${(pay.change_cents/100).toFixed(2)}.${rn} Receipt queued.`);
+                items = []; renderCart();
+                // Poll for printed status
+                await pollPrinted(oid, 5, 1200);
+            }catch(e){ setStatus(e.message||String(e), false); }
+        }
         document.querySelectorAll('.btn[data-amt]').forEach(b => {
-            b.addEventListener('click', () => alert('Tender: $' + b.getAttribute('data-amt')));
+            b.addEventListener('click', () => tenderWithAmount(Number(b.getAttribute('data-amt'))));
         });
+        const btnExact = document.getElementById('btnExactAmt');
+        if(btnExact){ btnExact.addEventListener('click', ()=> tenderWithAmount(currentTotal())); }
+
+        async function pollPrinted(orderPublicId, attempts=5, delayMs=1000){
+            for(let i=0;i<attempts;i++){
+                try{
+                    const r = await fetch(`/api/v1/orders/${orderPublicId}`);
+                    if(!r.ok) break;
+                    const j = await r.json();
+                    const lr = j && j.latest_receipt;
+                    if(lr && lr.printed_at){ setStatus(`Printed. Receipt #${lr.receipt_number}.`, true); return; }
+                }catch(_){}
+                await new Promise(res=> setTimeout(res, delayMs));
+            }
+        }
 
         // Customer modal logic
         const btnCustomer = document.getElementById('btnCustomer');
@@ -298,8 +378,61 @@
             try{
                 const res = await fetch('/api/pos/session');
                 const json = await res.json();
-                if(json && json.data){ currentCashierLabel.textContent = 'Cashier: ' + json.data.name; }
+                if(json && json.data){
+                    currentCashierLabel.textContent = 'Cashier: ' + json.data.name;
+                    posCtx = {
+                        branch_id: json.data.branch_id ?? 1,
+                        branch_unit_id: json.data.branch_unit_id ?? 1,
+                        register_id: json.data.register_id ?? 1,
+                        employee_id: json.data.id ?? 1,
+                    };
+                }
             }catch(e){ /* ignore */ }
         })();
+
+        // Quick Demo Sale: post to /api/v1/orders then /payments
+        function idemKey(){
+            return 'ik-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+        }
+        async function quickOrder(){
+            const body = {
+                client_request_id: 'demo-' + Date.now(),
+                context: posCtx,
+                order: {
+                    type: 'takeaway',
+                    items: [
+                        { sku: 'BRG001', name: 'Burger', qty: 1, unit_price_cents: 12000, tax_rate_bp: 1200, route_station: 'GRILL' },
+                        { sku: 'FRY001', name: 'Fries', qty: 1, unit_price_cents: 5000, tax_rate_bp: 1200, route_station: 'FRY' }
+                    ],
+                    notes: 'Demo sale'
+                }
+            };
+            const res = await fetch('/api/v1/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idemKey() },
+                body: JSON.stringify(body)
+            });
+            if(!res.ok){ throw new Error('Order create failed: ' + res.status); }
+            const json = await res.json();
+            return json.public_id;
+        }
+        async function pay(publicId){
+            const res = await fetch(`/api/v1/orders/${publicId}/payments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idemKey() },
+                body: JSON.stringify({ method: 'cash', amount_cents: 20000 })
+            });
+            if(!res.ok){ throw new Error('Payment failed: ' + res.status); }
+            const json = await res.json();
+            return json;
+        }
+        document.getElementById('quickDemoSale').addEventListener('click', async ()=>{
+            try{
+                const oid = await quickOrder();
+                const payRes = await pay(oid);
+                const rn = payRes && payRes.receipt_number ? ` Receipt #${payRes.receipt_number}.` : '';
+                alert(`Order ${oid} paid. Change: ${(payRes.change_cents/100).toFixed(2)}.${rn}`);
+            }catch(e){ alert(e.message||String(e)); }
+        });
 </script>
 @endsection

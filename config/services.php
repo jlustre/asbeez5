@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'edge' => [
+        'base_url' => env('EDGE_BASE_URL', 'http://localhost:4710'),
+    ],
+
 ];

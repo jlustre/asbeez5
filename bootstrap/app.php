@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \App\Http\Middleware\EnsurePermissionLevel::class,
             'permission.level' => \App\Http\Middleware\EnsurePermissionLevel::class,
             'pos.auth' => \App\Http\Middleware\PosAuthenticate::class,
+            'idempotency.require' => \App\Http\Middleware\RequireIdempotencyKey::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

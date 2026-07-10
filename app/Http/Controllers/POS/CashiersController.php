@@ -54,6 +54,16 @@ class CashiersController extends Controller
     {
         $id = Session::get('pos_cashier_id');
         $name = Session::get('pos_cashier_name');
-        return response()->json(['data' => $id ? ['id' => $id, 'name' => $name] : null]);
+        if (! $id) {
+            return response()->json(['data' => null]);
+        }
+        $emp = Employee::query()->find($id);
+        return response()->json(['data' => [
+            'id' => $id,
+            'name' => $name,
+            'branch_id' => $emp?->branch_id ?? 1,
+            'branch_unit_id' => 1,
+            'register_id' => 1,
+        ]]);
     }
 }
